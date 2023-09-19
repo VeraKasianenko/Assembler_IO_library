@@ -1,0 +1,35 @@
+name: CI
+
+on: [push]
+
+jobs:
+  testlab1:
+    runs-on: ubuntu-latest 
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.11
+
+    - name: Install nasm
+      run: |
+        sudo apt-get update
+        sudo apt-get install nasm -y
+
+    - name: Install xmlrunner
+      run: |
+        pip install xmlrunner
+
+    - name: Run tests
+      run: |
+        python test.py
+
+    - name: Upload test results
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-results
+        path: report.xml
