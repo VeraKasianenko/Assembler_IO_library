@@ -20,10 +20,6 @@ jobs:
         sudo apt-get update
         sudo apt-get install nasm -y
 
-    - name: Install xmlrunner
-      run: |
-        pip install xmlrunner
-
     - name: Run tests
       run: |
         python test.py
